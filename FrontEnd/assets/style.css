@@ -47,12 +47,14 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+.login-body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -93,9 +95,10 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	color: #000000;
 }
 
-li:hover {
+li:hover, li a:hover{
 	color: #B1663C;
 }
 #introduction {
@@ -215,4 +218,60 @@ footer nav ul {
 	background-color: #1D6154;
 	color: white;
 	
+}
+
+/* login page */
+a {
+	text-decoration: none;
+	color: #000000;
+}
+.loging-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-page h2 {
+	text-align: center;
+	margin: 35px 0;
+}
+.loging-container div {
+	display: flex;
+	flex-direction: column;
+	margin: 35px 0;
+	gap: 10px;
+}
+#connexion-E, #mdp {
+	width: 376px;
+	height: 48px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	font-size: 18px;
+}
+.btnConnect {
+	border-radius: 60px;
+	width: 179px;
+	height: 36px;
+	color: white;
+	background-color: #1D6154;
+	border: none;
+	margin-bottom: 35px;
+}
+.forget-password {
+	text-decoration: underline;
+}
+
+.login-footer nav {
+	background-color: white;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+}
+.fullbody {
+	height: 83vh;
+}
+nav a.active {
+	font-size: 1.3rem;
+	font-weight: 700;
 }

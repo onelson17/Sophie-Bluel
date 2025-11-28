@@ -4,9 +4,8 @@ const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
 // Récupération des catégorie depuis l'API cattegories //
-const reponse2 = await fetch("http://localhost:5678/api/categories")
-const categorie = await reponse2.json()
-
+const reponseCategorie = await fetch("http://localhost:5678/api/categories")
+const categorie = await reponseCategorie.json()
 
 
 const imgGallery = document.querySelector(".gallery")
@@ -32,7 +31,7 @@ function genererGalery(works) {
 genererGalery(works)
 
 const btnFilters = document.querySelector(".filter-btn")
-//c Création du boutton -- TOUS -- //
+// Création du boutton -- TOUS -- //
 const btnDefault = document.createElement("button")
 
 btnDefault.textContent = "Tous"
@@ -73,16 +72,23 @@ boutton.forEach(btn => {
 
 const objetFilter = document.querySelector(".objet-filter");
 
+/**
+ * Filtre les œuvres selon une catégorie et met à jour la galerie affichée.
+ *
+ * @param {number} idCategorie - L'identifiant de la catégorie à filtrer.
+ * @returns {void}
+ */
 function filtrageCategorie(idCategorie) {
     const result = works.filter(work => work.categoryId === idCategorie)
     imgGallery.innerHTML = ""
     genererGalery(result)
 }
 
+
 btnDefault.addEventListener("click", () => {
     imgGallery.innerHTML = ""
     genererGalery(works)
-});
+})
 
 btnObjets.addEventListener("click", () => {
     filtrageCategorie(1)
@@ -95,3 +101,5 @@ btnAppartements.addEventListener("click", () => {
 btnHR.addEventListener("click", () => {
     filtrageCategorie(3)
 })
+
+// Récupère tous les liens du menu
