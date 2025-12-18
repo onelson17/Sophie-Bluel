@@ -221,7 +221,7 @@ function genererGaleryModale(works) {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            });
+            })
             //  supprime le projet dans la galerie et dans la modale  //
             if (response.ok) {
                 const index = works.findIndex(w => w.id === work.id);
@@ -257,3 +257,7 @@ async function recupCategorie() {
 }
 
 recupCategorie();
+// preview de l'image selectionner //
+const imageInput = document.getElementById('image-upload');
+const imagePreview = document.querySelector('.image-preview');
+
