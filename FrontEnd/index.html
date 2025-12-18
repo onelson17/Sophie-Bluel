@@ -25,12 +25,7 @@
 		<div class="modal-gallery" >
 			<h3 class="modal-title">Galerie photo</h3>
 			<div class="photos-mini">
-				<figure class="work-item" data-id="1">
-					<img src="" alt="">
-					<button class="delete-item">
-						<i class="fa-regular fa-trash-can"></i>
-					</button>
-				</figure>
+				
 			</div>
 			<button class="modal-add">Ajouter une photo</button>
 		</div>
@@ -43,17 +38,21 @@
 			<form action="" enctype="multipart/form-data">
 
 				<div>
-					<input type="file">
+					<input type="file" id="image-upload" accept="image/*" required>
+<img class="image-preview" style="display:none;">
 				</div>
 				<div>
-					<label for="titre">Titre</label>
+					<label for="Titre">Titre</label>
 					<input required type="text" name="Titre" id="titre-modale">
 			   </div>
 			   <div>
-					<label for="categorie-photo">Mot de passe</label>
-					<input required name="categorie-photo" id="photo-type">
+					<label for="categorie">Catégorie</label>
+					<select name="categorie" id="categorie">
+						<option value="">-- Sélectionner une catégorie --</option>
+					</select>
 			   </div>
-			<button type="submit" class="modal-add">Valider</button>à
+			   <hr class="separator">
+			<button type="submit" class="modal-add">Valider</button>
 			</form>
 
 		</div>

@@ -11,20 +11,21 @@ const categorie = await reponseCategorie.json()
 const imgGallery = document.querySelector(".gallery")
 // Intégration dynamique des travaux //
 function genererGalery(works) {
+    imgGallery.innerHTML = "";
     for (let i = 0; i < works.length; i++) {
-
-        const figureElement = document.createElement("figure")
+        const figureElement = document.createElement("figure");
+        figureElement.dataset.id = works[i].id;
         
-        const imgProjet = document.createElement("img")
-        imgProjet.src = works[i].imageUrl
-        imgProjet.alt = works[i].title
+        const imgProjet = document.createElement("img");
+        imgProjet.src = works[i].imageUrl;
+        imgProjet.alt = works[i].title;
         
-        const figCaption = document.createElement("figcaption")
-        figCaption.innerText = works[i].title
+        const figCaption = document.createElement("figcaption");
+        figCaption.innerText = works[i].title;
         
-        imgGallery.appendChild(figureElement)
-        figureElement.appendChild(imgProjet)
-        figureElement.appendChild(figCaption) 
+        imgGallery.appendChild(figureElement);
+        figureElement.appendChild(imgProjet);
+        figureElement.appendChild(figCaption);
     }
 }
 // Intégration des boutons filtres/tri //
@@ -187,10 +188,10 @@ if (boutonRetour) {
 // ajout de la galerie dans la modale //
 
 const modalGalery = document.querySelector(".photos-mini")
-
+// generer la galerie à vide, eviter les doublons si plusieurs appels à la fonction //
 function genererGaleryModale(works) {
     modalGalery.innerHTML = ""
-
+// ajout dynamique des travaux dans la modale //
     works.forEach(work => {
         const figure = document.createElement("figure")
         figure.classList.add("work-item")
@@ -210,23 +211,49 @@ function genererGaleryModale(works) {
         figure.appendChild(img)
         figure.appendChild(button)
         modalGalery.appendChild(figure)
-
+// permet de supprimer uniquement si l'utilisateur est connecté = token présent //
         button.addEventListener("click", async (e) => {
-            e.preventDefault()
-            const token = localStorage.getItem("token")
+            e.preventDefault();
+            const token = localStorage.getItem("token");
 
             const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            })
-
+            });
+            //  supprime le projet dans la galerie et dans la modale  //
             if (response.ok) {
-                document.querySelectorAll(`[data-id="${work.id}"]`).forEach(el => el.remove())
+                const index = works.findIndex(w => w.id === work.id);
+                if (index !== -1) {
+                    works.splice(index, 1);
+                }
+                document.querySelectorAll(`[data-id="${work.id}"]`).forEach(el => el.remove());
             }
-        })
+        });
     })
 }
 
 genererGaleryModale(works)
+// modale form - categorie //
+const categorieSelect = document.getElementById("categorie");
+// récupération dynamique des catégories //
+async function recupCategorie() {
+    try {
+        const response = await fetch("http://localhost:5678/api/categories");
+        const categories = await response.json();
+
+        categorieSelect.innerHTML = '<option value=""></option>';
+
+        categories.forEach(cat => {
+            const option = document.createElement("option");
+            option.value = cat.id;
+            option.textContent = cat.name;
+            categorieSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des catégories:', error);
+    }
+}
+
+recupCategorie();

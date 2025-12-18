@@ -277,7 +277,11 @@ a {
 .forget-password {
 	text-decoration: underline;
 }
-
+.footer-fixed {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
 .login-footer nav {
 	background-color: white;
 	width: 100%;
@@ -389,7 +393,7 @@ nav a.active {
 .hidden {
 	display: none;
 }
-/* modale form  */
+/* modale galerie */
 figure {
 	position: relative;
 }
@@ -398,7 +402,7 @@ figure {
 	gap: 10px;
 	flex-wrap: wrap;
 	align-items: center;
-	
+	padding-bottom: 30px;
 }
 .work-item img {
 	max-width: 100px;
@@ -413,4 +417,26 @@ figure {
 }
 .delete-item i {
 	color: white;
+}
+/* modale form  */
+.modal-form div {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 20px;
+}
+.modal-form input, select {
+	width: 420px;
+	padding: 15px;
+	border: none;
+	box-shadow: 0px 4px 14px 0px #00000017;
+}
+select {
+	width: 450px;
+	box-sizing: border-box;
+}
+.separator {
+	color: #B3B3B3;
+	margin: 30px 0;
+	width: 80%;
 }
