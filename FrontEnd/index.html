@@ -8,10 +8,58 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="script.js"></script>
 </head>
 <body>
+<div class="edit-mode">
+    <i class="fa-regular fa-pen-to-square fa-lg"></i>
+    <p>Mode édition</p>
+</div>
+
+<aside class="modal" id="editModal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+	<div class="modal-wrapper">
+		<span class="close"><i class="fa-solid fa-xmark fa-lg"></i></span>
+
+		<div class="modal-gallery" >
+			<h3 class="modal-title">Galerie photo</h3>
+			<div class="photos-mini">
+				<figure class="work-item" data-id="1">
+					<img src="" alt="">
+					<button class="delete-item">
+						<i class="fa-regular fa-trash-can"></i>
+					</button>
+				</figure>
+			</div>
+			<button class="modal-add">Ajouter une photo</button>
+		</div>
+
+		<div class="modal-form" style="display: none;">
+			<div>
+				<span class="back"><i class="fa-solid fa-arrow-left fa-lg"></i></span>
+			</div>
+			<h3 class="modal-title">Ajout photo</h3>
+			<form action="" enctype="multipart/form-data">
+
+				<div>
+					<input type="file">
+				</div>
+				<div>
+					<label for="titre">Titre</label>
+					<input required type="text" name="Titre" id="titre-modale">
+			   </div>
+			   <div>
+					<label for="categorie-photo">Mot de passe</label>
+					<input required name="categorie-photo" id="photo-type">
+			   </div>
+			<button type="submit" class="modal-add">Valider</button>à
+			</form>
+
+		</div>
+	</div>
+</aside>
+
 <div class="login-body">
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -19,7 +67,7 @@
 			<ul>
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li><a href="login.html">login</a></li>
+				<li><a class="active" href="login.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -37,7 +85,13 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="projet-edit">
+				<h2>Mes Projets</h2>
+				<div class="btn-modifier">
+					<i class="fa-regular fa-pen-to-square fa-lg"></i>
+					<p>Modifier</p>
+				</div>
+			</div>
 			<div class="filter-btn">
 				
 			</div>
@@ -61,7 +115,7 @@
 	</main>
 </div>
 
-<footer>
+<footer class="login-footer">
 	<nav>
 		<ul>
 			<li>Mentions Légales</li>

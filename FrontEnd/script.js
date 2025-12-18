@@ -102,4 +102,131 @@ btnHR.addEventListener("click", () => {
     filtrageCategorie(3)
 })
 
-// Récupère tous les liens du menu
+// MODE EDITON ====== LOGIN - LOGOUT //
+const token = localStorage.getItem("token")
+
+if (token) {
+    document.querySelector(".edit-mode").style.display = "flex"
+    document.querySelector(".projet-edit div").style.display = "flex"
+    // cacher le bouton login = logout
+    const loginLink = document.querySelector('a[href="login.html"]')
+// cache les filtres en mode edition //
+    if (btnFilters) btnFilters.style.display = "none"
+// affiche logout si user connecté et retire le token au click //
+    if (loginLink) {
+        loginLink.textContent = "logout"
+        loginLink.addEventListener("click", () => {
+            localStorage.removeItem("token")
+        })
+    }
+    // afficher les boutons "modifier"
+    const editButtons = document.querySelectorAll(".projet-edit div");
+    editButtons.forEach(btn => btn.style.display = "flex");
+} else {
+      // non connecté = mode édition désactivé
+    document.querySelector(".edit-mode").style.display = "none";
+    // caches les bouton quand user deconnecté et affiche les filtres //
+    const editButtons = document.querySelector(".projet-edit");
+    editButtons.forEach(btn => btn.style.display = "none");
+    if (btnFilters) btnFilters.style.display = "flex";
+}
+// MODALE //
+const boutonModifier = document.querySelector(".btn-modifier");
+const modale = document.getElementById("editModal");
+const boutonFermer = modale.querySelector(".close");
+
+// function Rendre la modale visible et accessible //
+function ouvrirModale(e) {
+    if (e) {
+        e.preventDefault(); 
+    }
+    modale.style.display = "flex";
+    modale.setAttribute("aria-hidden", "false");
+    modale.setAttribute("aria-modal", "true");
+}
+// Function fermer Modale //
+function fermerModale() {
+    modale.style.display = "none";
+    modale.setAttribute("aria-hidden", "true");
+    modale.setAttribute("aria-modal", "false");
+}
+//ouvrir au click sur modifier//
+if (boutonModifier) {
+    boutonModifier.addEventListener("click", ouvrirModale);
+}
+// fermer au click sur la croix //
+if (boutonFermer) {
+    boutonFermer.addEventListener("click", fermerModale);
+}
+//fermer au click en dehors de la fenetre
+window.addEventListener("click", (e) => {
+    if (e.target === modale) {
+        fermerModale();
+    }
+})
+// au click du boutton ajouter photo, basculer sur le formulaire //
+const btnAjouterPhoto = document.querySelector(".modal-add");
+const boutonRetour = document.querySelector(".back");
+const afficherGalerie = document.querySelector(".modal-gallery");
+const afficherFormulaire = document.querySelector(".modal-form");
+
+if (btnAjouterPhoto) {
+    btnAjouterPhoto.addEventListener("click", () => {
+        afficherGalerie.style.display = "none"
+        afficherFormulaire.style.display = "block"
+    })
+}
+// Retour -  sur la modale gallery //
+if (boutonRetour) {
+    boutonRetour.addEventListener("click", () => {
+        afficherGalerie.style.display = "flex"
+        afficherFormulaire.style.display = "none"
+    })
+}
+
+// ajout de la galerie dans la modale //
+
+const modalGalery = document.querySelector(".photos-mini")
+
+function genererGaleryModale(works) {
+    modalGalery.innerHTML = ""
+
+    works.forEach(work => {
+        const figure = document.createElement("figure")
+        figure.classList.add("work-item")
+        figure.dataset.id = work.id
+
+        const img = document.createElement("img")
+        img.src = work.imageUrl
+        img.alt = work.title
+
+        const button = document.createElement("button")
+        button.classList.add("delete-item")
+
+        const icon = document.createElement("i")
+        icon.classList.add("fa-regular", "fa-trash-can")
+
+        button.appendChild(icon)
+        figure.appendChild(img)
+        figure.appendChild(button)
+        modalGalery.appendChild(figure)
+
+        button.addEventListener("click", async (e) => {
+            e.preventDefault()
+            const token = localStorage.getItem("token")
+
+            const response = await fetch(`http://localhost:5678/api/works/${work.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            if (response.ok) {
+                document.querySelectorAll(`[data-id="${work.id}"]`).forEach(el => el.remove())
+            }
+        })
+    })
+}
+
+genererGaleryModale(works)
