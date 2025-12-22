@@ -351,10 +351,7 @@ nav a.active {
 	overflow: auto;
 	padding: 40px;
 }
-.modal-form div {
-	display: flex;
-	justify-content: space-between;
-}
+
 .modal-title {
 	text-align: center;
 	font-size: 23px;
@@ -440,22 +437,54 @@ select {
 	margin: 30px 0;
 	width: 80%;
 }
-.image-preview {
+.preview-contain {
 	width: 450px;
 	height: 170px;
 	background-color: #E8F1F6;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+	border-radius: 3px;
 }
-.modal-form form > div:first-of-type {
-	align-items: center;
-	position: relative;
+.image-preview {
+	display: none; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    z-index: 10; 
+}
+
+.btn-upload {
+	width: 173px;
+	background-color: #CBD6DC;
+	height: 36px;
+	border-radius: 50px;
+	text-align: center;
+	line-height: 36px;
+	color: #306685;
+	margin-top: 25px;
 }
 #image-upload {
 	width: 170px;
 	border-radius: 50px;
 	background-color: #CBD6DC;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%)
-   
+	display: none;
+}
+.preview-contain i {
+	font-size: 4em;
+	color: #B9C5CC;
+}
+.upload-elements {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.upload-text {
+	font-size: 10px;
+	color: #444444;
 }

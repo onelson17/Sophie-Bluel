@@ -252,12 +252,29 @@ async function recupCategorie() {
             categorieSelect.appendChild(option);
         });
     } catch (error) {
-        console.error('Erreur lors de la récupération des catégories:', error);
+        console.error("Erreur lors de la récupération des catégories:", error);
     }
 }
 
 recupCategorie();
 // preview de l'image selectionner //
-const imageInput = document.getElementById('image-upload');
-const imagePreview = document.querySelector('.image-preview');
+const imageInput = document.getElementById("image-upload");
+const imagePreview = document.querySelector(".image-preview");
+const previewContain = document.querySelector(".preview-contain")
+const uploadElement = document.querySelector(".upload-elements")
 
+imageInput.addEventListener("change", () => {
+    const image = imageInput.files[0]
+
+    if(image) {
+        const reader = new FileReader()
+
+        reader.onload = (e) => {
+            imagePreview.src = e.target.result
+            document.querySelector(".hide-element").style.display = "none"
+            imagePreview.style.display = "block"
+            uploadElement.style.display = "none"
+        }
+        reader.readAsDataURL(image)
+    }
+})

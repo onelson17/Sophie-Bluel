@@ -37,12 +37,16 @@
 			<h3 class="modal-title">Ajout photo</h3>
 			<form action="" enctype="multipart/form-data">
 
-				<div>	
+				<div class="preview-contain">	
 					<img class="image-preview">
-					<input type="file" id="image-upload" accept="image/*" required>
-					<p>jpg, png : 4mo max</p>
+					<div class="upload-elements">
+						<i class="fa-regular fa-image fa-2xl"></i>
+						<label class="btn-upload" for="image-upload">+ Photo</label>
+						<input type="file" class="hide-element" id="image-upload" name="image-upload" accept="image/*" required>
+						<p class="upload-text">jpg, png : 4mo max</p>
+						</div>
 				</div>
-				<div>
+				<div >
 					<label for="Titre">Titre</label>
 					<input required type="text" name="Titre" id="titre-modale">
 			   </div>
