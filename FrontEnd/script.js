@@ -3,7 +3,7 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
-// Récupération des catégorie depuis l'API cattegories //
+// Récupération des catégorie depuis l'API categories //
 const reponseCategorie = await fetch("http://localhost:5678/api/categories")
 const categorie = await reponseCategorie.json()
 
@@ -81,7 +81,6 @@ const objetFilter = document.querySelector(".objet-filter");
  */
 function filtrageCategorie(idCategorie) {
     const result = works.filter(work => work.categoryId === idCategorie)
-    imgGallery.innerHTML = ""
     genererGalery(result)
 }
 
@@ -128,7 +127,7 @@ if (token) {
     document.querySelector(".edit-mode").style.display = "none";
     // caches les bouton quand user deconnecté et affiche les filtres //
     const editButtons = document.querySelector(".projet-edit");
-    editButtons.forEach(btn => btn.style.display = "none");
+    editButtons.style.display = "none"
     if (btnFilters) btnFilters.style.display = "flex";
 }
 // MODALE //
@@ -147,6 +146,7 @@ function ouvrirModale(e) {
 }
 // Function fermer Modale //
 function fermerModale() {
+    
     modale.style.display = "none";
     modale.setAttribute("aria-hidden", "true");
     modale.setAttribute("aria-modal", "false");
@@ -342,7 +342,6 @@ function majGalery(newProject) {
     genererGaleryModale(works)
     resetForm()
     fermerModale()
-    alert("projet ajouté !")
 }
 // reset du form après ajout de la photo //
 function resetForm() {

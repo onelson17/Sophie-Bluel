@@ -18,7 +18,7 @@
     <p>Mode édition</p>
 </div>
 
-<aside class="modal" id="editModal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+<div class="modal" id="editModal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
 	<div class="modal-wrapper">
 		<span class="close"><i class="fa-solid fa-xmark fa-lg"></i></span>
 
@@ -35,10 +35,10 @@
 				<span class="back"><i class="fa-solid fa-arrow-left fa-lg"></i></span>
 			</div>
 			<h3 class="modal-title">Ajout photo</h3>
-			<form action="" enctype="multipart/form-data">
+			<form enctype="multipart/form-data">
 
 				<div class="preview-contain">	
-					<img class="image-preview">
+					<img class="image-preview" src="#" alt="Aperçu">
 					<div class="upload-elements">
 						<i class="fa-regular fa-image fa-2xl"></i>
 						<label class="btn-upload" for="image-upload">+ Photo</label>
@@ -47,7 +47,7 @@
 						</div>
 				</div>
 				<div >
-					<label for="Titre">Titre</label>
+					<label for="titre-modale">Titre</label>
 					<input required type="text" name="Titre" id="titre-modale">
 			   </div>
 			   <div>
@@ -63,7 +63,7 @@
 
 		</div>
 	</div>
-</aside>
+</div> 
 
 <div class="login-body">
 	<header>
@@ -78,7 +78,7 @@
 		</nav>
 	</header>
 	<main>
-		<section id="introduction">
+		<div id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 			</figure>
@@ -88,7 +88,7 @@
 				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 			</article>
-		</section>
+		</div>
 		<section id="portfolio">
 			<div class="projet-edit">
 				<h2>Mes Projets</h2>
