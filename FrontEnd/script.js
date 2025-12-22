@@ -267,6 +267,13 @@ imageInput.addEventListener("change", () => {
     const image = imageInput.files[0]
 
     if(image) {
+
+        if (image.size > 4 * 1024 * 1024) {
+            alert("Le fichier est trop volumineux (4Mo max).")
+             imageInput.value = ""
+             return
+        }
+
         const reader = new FileReader()
 
         reader.onload = (e) => {
@@ -278,3 +285,25 @@ imageInput.addEventListener("change", () => {
         reader.readAsDataURL(image)
     }
 })
+
+//
+const form = document.querySelector(".modal-form form");
+const btnValider = document.querySelector(".modal-form .modal-add");
+// passage au vert du bouton lorsque toutes les champs sont remplis//
+form.addEventListener("input", () => {
+    const title = document.getElementById("titre-modale").value;
+    const category = document.getElementById("categorie").value;
+    const image = imageInput.files[0];
+
+
+    if (title && category && image) {
+        btnValider.style.backgroundColor = "#1D6154"
+        btnValider.disabled = false;
+    } else {
+        btnValider.style.backgroundColor = "#A7A7A7"
+        btnValider.disabled = true;
+    }
+})
+
+//
+
