@@ -334,5 +334,22 @@ form.addEventListener("submit", async (e) => {
 console.log("Erreur réseau", error)
 }
 })
+// ajout de l'objet au tableau des works, ajout dans les galeries //
+function majGalery(newProject) {
+    works.push(newProject)
+
+    genererGalery(works)
+    genererGaleryModale(works)
+    resetForm()
+    fermerModale()
+    alert("projet ajouté !")
+}
+// reset du form après ajout de la photo //
+function resetForm() {
+    form.reset()
+    uploadElement.style.display = "flex"
+    imagePreview.style.display = "none"
+    btnValider.style.backgroundColor = "#A7A7A7"
+}
 
 
