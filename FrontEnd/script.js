@@ -305,5 +305,34 @@ form.addEventListener("input", () => {
     }
 })
 
-//
+// création de l'objet, requete post a l'API //
+form.addEventListener("submit", async (e) => {
+    e.preventDefault() 
+
+    const formData = new FormData()
+    formData.append("title", document.getElementById("titre-modale").value)
+    formData.append("category", document.getElementById("categorie").value)
+    formData.append("image", imageInput.files[0])
+    const token = localStorage.getItem("token")
+
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${token}` },
+            body: formData
+        })
+        
+    if(response.ok) {
+        const newWork = await response.json()
+        majGalery(newWork)
+
+    } else {
+        document.querySelector(".error-fmodal").textContent = "Erreur lors de l'envoi"
+    }
+
+} catch(error) {
+console.log("Erreur réseau", error)
+}
+})
+
 
