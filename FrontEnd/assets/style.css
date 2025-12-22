@@ -143,7 +143,8 @@ li:hover, li a:hover{
 
 .gallery img {
 	width: 100%;
-
+	aspect-ratio: 365 / 490;
+	object-fit: cover;
 }
 #contact {
 	width: 50%;
@@ -403,6 +404,8 @@ figure {
 }
 .work-item img {
 	max-width: 100px;
+	aspect-ratio: 100 / 135;
+	object-fit: cover;
 }
 
 .delete-item {
