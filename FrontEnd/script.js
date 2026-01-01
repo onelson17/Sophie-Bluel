@@ -11,7 +11,7 @@ const categorie = await reponseCategorie.json()
 const imgGallery = document.querySelector(".gallery")
 // Intégration dynamique des travaux //
 function genererGalery(works) {
-    imgGallery.innerHTML = "";
+    imgGallery.innerHTML = ""
     for (let i = 0; i < works.length; i++) {
         const figureElement = document.createElement("figure");
         figureElement.dataset.id = works[i].id;
@@ -120,40 +120,45 @@ if (token) {
         })
     }
     // afficher les boutons "modifier"
-    const editButtons = document.querySelectorAll(".projet-edit div");
-    editButtons.forEach(btn => btn.style.display = "flex");
+    const editButtons = document.querySelectorAll(".projet-edit div")
+    editButtons.forEach(btn => btn.style.display = "flex")
 } else {
       // non connecté = mode édition désactivé
-    document.querySelector(".edit-mode").style.display = "none";
+    document.querySelector(".edit-mode").style.display = "none"
     // caches les bouton quand user deconnecté et affiche les filtres //
-    const editButtons = document.querySelector(".projet-edit");
+    const editButtons = document.querySelector(".projet-edit")
     editButtons.style.display = "none"
-    if (btnFilters) btnFilters.style.display = "flex";
+    if (btnFilters) btnFilters.style.display = "flex"
 }
 // MODALE //
-const boutonModifier = document.querySelector(".btn-modifier");
-const modale = document.getElementById("editModal");
-const boutonFermer = modale.querySelector(".close");
+const boutonModifier = document.querySelector(".btn-modifier")
+const modale = document.getElementById("editModal")
+const boutonFermer = modale.querySelector(".close")
+const editMode = document.querySelector(".edit-mode")
+
 
 // function Rendre la modale visible et accessible //
 function ouvrirModale(e) {
     if (e) {
-        e.preventDefault(); 
+        e.preventDefault()
     }
-    modale.style.display = "flex";
-    modale.setAttribute("aria-hidden", "false");
-    modale.setAttribute("aria-modal", "true");
+    modale.style.display = "flex"
+    modale.setAttribute("aria-hidden", "false")
+    modale.setAttribute("aria-modal", "true")
 }
 // Function fermer Modale //
 function fermerModale() {
     
-    modale.style.display = "none";
-    modale.setAttribute("aria-hidden", "true");
-    modale.setAttribute("aria-modal", "false");
+    modale.style.display = "none"
+    modale.setAttribute("aria-hidden", "true")
+    modale.setAttribute("aria-modal", "false")
 }
 //ouvrir au click sur modifier//
 if (boutonModifier) {
     boutonModifier.addEventListener("click", ouvrirModale);
+}
+if (editMode) {
+    editMode.addEventListener("click", ouvrirModale)
 }
 // fermer au click sur la croix //
 if (boutonFermer) {
