@@ -32,44 +32,41 @@ function genererGalery(works) {
 genererGalery(works)
 
 const btnFilters = document.querySelector(".filter-btn")
+function GenererFiltres (categorie, works) {
+    btnFilters.innerHTML = ""
 // Création du boutton -- TOUS -- //
 const btnDefault = document.createElement("button")
-
 btnDefault.textContent = "Tous"
 btnDefault.classList.add("default-filter")
 btnFilters.appendChild(btnDefault)
 
-// Création du boutton -- OBJETS -- //
-const btnObjets = document.createElement("button")
+btnDefault.addEventListener("click", () => {
+    selectedButton(btnDefault)
+    genererGalery(works)
+})
 
-btnObjets.textContent = "Objets"
-btnObjets.classList.add("objet-filter")
-btnFilters.appendChild(btnObjets)
+categorie.forEach(cat => {
+    const button = document.createElement("button")
+    button.textContent = cat.name
+    btnFilters.appendChild(button)
 
-// Création du boutton -- APPARTEMENTS -- //
-const btnAppartements = document.createElement("button")
-
-btnAppartements.textContent = "Appartements"
-btnAppartements.classList.add("appartement-filter")
-btnFilters.appendChild(btnAppartements)
-
-// Création du boutton -- H & R
-const btnHR = document.createElement("button")
-
-btnHR.textContent = "Hotels & Restaurants"
-btnHR.classList.add("hr-filter")
-btnFilters.appendChild(btnHR)
-
-// animation selection bouttons //
-
-const boutton = document.querySelectorAll("button")
-
-boutton.forEach(btn => {
-    btn.addEventListener("click", () => {
-        boutton.forEach(b => b.classList.remove("btn-selected"))
-        btn.classList.add("btn-selected")
+    button.addEventListener("click", () => {
+        selectedButton(button)
+        filtrageCategorie(cat.id)
     })
 })
+}
+GenererFiltres(categorie, works)
+
+
+
+// fonction animation  boutton selectionné //
+
+function selectedButton(btnSelected) {
+    const allBtn = document.querySelectorAll(".filter-btn button")
+    allBtn.forEach(btn => btn.classList.remove("btn-selected"))
+    btnSelected.classList.add("btn-selected")
+}
 
 const objetFilter = document.querySelector(".objet-filter");
 
@@ -84,23 +81,6 @@ function filtrageCategorie(idCategorie) {
     genererGalery(result)
 }
 
-
-btnDefault.addEventListener("click", () => {
-    imgGallery.innerHTML = ""
-    genererGalery(works)
-})
-
-btnObjets.addEventListener("click", () => {
-    filtrageCategorie(1)
-})
-
-btnAppartements.addEventListener("click", () => {
-    filtrageCategorie(2)
-})
-
-btnHR.addEventListener("click", () => {
-    filtrageCategorie(3)
-})
 
 // MODE EDITON ====== LOGIN - LOGOUT //
 const token = localStorage.getItem("token")
@@ -309,7 +289,15 @@ form.addEventListener("input", () => {
         btnValider.disabled = true;
     }
 })
+// ajout de l'objet au tableau des works, ajout dans les galeries //
+function majGalery(newProject) {
+    works.push(newProject)
 
+    genererGalery(works)
+    genererGaleryModale(works)
+    resetForm()
+    fermerModale()
+}
 // création de l'objet, requete post a l'API //
 form.addEventListener("submit", async (e) => {
     e.preventDefault() 
@@ -339,15 +327,7 @@ form.addEventListener("submit", async (e) => {
 console.log("Erreur réseau", error)
 }
 })
-// ajout de l'objet au tableau des works, ajout dans les galeries //
-function majGalery(newProject) {
-    works.push(newProject)
 
-    genererGalery(works)
-    genererGaleryModale(works)
-    resetForm()
-    fermerModale()
-}
 // reset du form après ajout de la photo //
 function resetForm() {
     form.reset()
